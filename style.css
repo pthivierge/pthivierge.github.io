@@ -1,0 +1,8 @@
+/* Styles go here */
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.gitHubHoverInfo {
+  position: absolute;
+  z-index: 100;
+}

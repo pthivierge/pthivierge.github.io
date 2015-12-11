@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="githubStats">
+
+<head>
+  <link data-require="bootstrap@*" data-semver="3.3.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+  <link data-require="bootstrap@*" data-semver="3.3.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.css">
+  <link rel="stylesheet" href="style.css" />
+
+
+
+</head>
+
+<body ng-controller="AppCtrl">
+
+  <div class="container">
+
+    <div ng-show="error">{{error}}</div>
+
+    <h1>{{org.name}} Repositories Statistics</h1>
+    <h3>Global stats for the {{total_repositories}} repositories</h3>
+
+    <table class="table table-condensed table-bordered table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Size</th>
+          <th>Forks</th>
+          <th>Stars</th>
+          <th>Watchers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Total</td>
+          <td>{{total_size | number}}</td>
+          <td>{{total_forks | number}}</td>
+          <td>{{total_stargazers | number}}</td>
+          <td>{{total_watchers | number}}</td>
+          <td>{{total_pullRequests | number}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+     <h3>Stats per repository</h3>
+    <table ng-table="tableParams" class="table table-condensed table-bordered table-striped">
+      <tr ng-repeat="repo in $data">
+        <td data-title="'Name'" sortable="'name'"><a href="{{repo.html_url}}">{{repo.name}}</a></td>
+        <td data-title="'Size'" sortable="'size'">{{repo.size | number}}</td>
+        <td data-title="'Forks'" sortable="'forks'">{{repo.forks | number}}</td>
+        <td data-title="'Stars'" sortable="'stargazers'">{{repo.stargazers_count | number}}</td>
+        <td data-title="'Watchers'" sortable="'watchers_count'">{{repo.watchers_count | number}}</td>
+        <td data-title="'Commits'" sortable="'total_commits'"><a href="{{repo.html_url}}/commits">{{repo.total_commits | number}}</a></td>
+        <td data-title="'Pull requests'" sortable="'total_pullRequests'"><a href="{{repo.html_url}}/pulls">{{repo.total_pullRequests | number}}</a></td>
+        
+        
+        <td data-title="'Last Updated'" sortable="'pushed_at'">{{repo.pushed_at | date}}</td>
+        <td><a href="{{repo.html_url}}/graphs/traffic">more stats</a></td>
+        
+      </tr>
+    </table>
+    
+    <div class="center-text">
+      <button ng-click="run()">refresh</button>
+    </div>
+    
+
+    <script data-require="angular.js@1.4.7" data-semver="1.4.7" src="https://code.angularjs.org/1.4.7/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.8.3/ng-table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+    <script src="script.js"></script>
+
+  </div>
+
+</body>
+
+</html>
