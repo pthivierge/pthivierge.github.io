@@ -179,7 +179,7 @@
 
     $scope.run=function() {
 
-      $scope.repos.lenght=0;
+      $scope.repos=[];
 
       // gets the organization information
       $http.get(API + "orgs/" + ORG)
