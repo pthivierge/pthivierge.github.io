@@ -7,7 +7,7 @@
   function AppCtrl($scope, $http, $filter, NgTableParams) {
 
     var API = "https://api.github.com/";
-    var ORG = "osisoft";
+    var ORG = "pthivierge";
 
     function onOrgComplete(response) {
 
