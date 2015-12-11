@@ -7,7 +7,8 @@
   function AppCtrl($scope, $http, $filter, NgTableParams) {
 
     var API = "https://api.github.com/";
-    var ORG = "pthivierge";
+    var REPOS = "users/pthivierge"; // for an org: "orgs/github";
+
 
     function onOrgComplete(response) {
 
@@ -50,7 +51,7 @@
       
       for (var i=0; i<repos.length;i++)
       {
-        var url=API + "repos/" + ORG + "/" + repos[i].name + "/stats/commit_activity";
+        var url=API + "repos/" + REPOS + "/" + repos[i].name + "/stats/commit_activity";
         
            $http.get(url,{ cache: true}).success((function(i)
            { 
@@ -80,7 +81,7 @@
       
       for (var i=0; i<repos.length;i++)
       {
-        var url=API + "search/issues?q=+type:pr+repo:" + ORG + "/" + repos[i].name;
+        var url=API + "search/issues?q=+type:pr+repo:" + REPOS + "/" + repos[i].name;
         
            $http.get(url,{ cache: true}).success((function(i)
            { 
@@ -97,10 +98,10 @@
      
       }
     }
-    
- 
-    
 
+
+    // https://gist.github.com/niallo/3109252
+    // JBKahn
     function parse_link_header(header) {
       if (header.length === 0) {
         throw new Error("input must not be of zero length");
@@ -170,7 +171,7 @@
         $scope.total_forks += parseInt(repo.forks_count, 10);
         $scope.total_size += parseInt(repo.size, 10);
         $scope.total_watchers += parseInt(repo.watchers_count, 10);
-         $scope.total_pullRequests+= parseInt(repo.total_pullRequests, 10);
+        $scope.total_pullRequests+= parseInt(repo.total_pullRequests, 10);
 
       }
 
@@ -182,8 +183,8 @@
       $scope.repos=[];
 
       // gets the organization information
-      $http.get(API + "orgs/" + ORG)
-        .then(onOrgComplete, onError)
+      //$http.get(API + "orgs/" + REPOS).then(onOrgComplete, onError)
+      $http.get(API + REPOS).then(onOrgComplete, onError)
 
 
     }
