@@ -7,7 +7,7 @@
   function AppCtrl($scope, $http, $filter, NgTableParams) {
 
     var API = "https://api.github.com/";
-    var REPOS = "users/pthivierge"; // for an org: "orgs/github";
+    var REPOS = "orgs/osisoft"; // for an org: "orgs/github";
 
 
     function onOrgComplete(response) {
